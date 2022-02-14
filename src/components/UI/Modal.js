@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import classes from './Modal.module.css';
 
 const Backdrop = (props) => {
-  return <div className={classes.backdrop} onClick={props.isClose} />;
+  return <div className={classes.backdrop} onClick={props.onClose}/>;
 };
 
 const ModalOverlay = (props) => {
@@ -14,13 +14,13 @@ const ModalOverlay = (props) => {
     </div>
   );
 };
-// Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component
+
 const portalElement = document.getElementById('overlays');
 
 const Modal = (props) => {
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop isClose={props.isClose}/>, portalElement)}
+      {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
       {ReactDOM.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
         portalElement
